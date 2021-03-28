@@ -1,5 +1,6 @@
 # Copyright (c) 2014 Scopely, Inc.
 # Copyright (c) 2015 Mitch Garnaat
+# Copyright (c) 2020 Jerome Guibert
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -16,59 +17,57 @@ import logging
 
 from skew.resources.aws import AWSResource
 
-
 LOG = logging.getLogger(__name__)
 
 
 class Function(AWSResource):
-
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = super(Function, cls).enumerate(arn, region, account,
-                                                   resource_id, **kwargs)
+        resources = list(super(Function, cls).enumerate(arn, region, account, resource_id, **kwargs))
         for r in resources:
-            r.data['EventSources'] = []
-            kwargs = {'FunctionName': r.data['FunctionName']}
-            response = r._client.call('list_event_source_mappings', **kwargs)
-            for esm in response['EventSourceMappings']:
-                r.data['EventSources'].append(esm['EventSourceArn'])
+            r.data["EventSources"] = []
+            kwargs = {"FunctionName": r.data["FunctionName"]}
+            response = r._client.call("list_event_source_mappings", **kwargs)
+            for esm in response["EventSourceMappings"]:
+                r.data["EventSources"].append(esm["EventSourceArn"])
         return resources
 
     class Meta(object):
-        service = 'lambda'
-        type = 'function'
-        enum_spec = ('list_functions', 'Functions', None)
+        service = "lambda"
+        type = "function"
+        enum_spec = ("list_functions", "Functions", None)
         detail_spec = None
-        id = 'FunctionName'
+
+        id = "FunctionName"
         filter_name = None
-        name = 'FunctionName'
-        date = 'LastModified'
-        dimension = 'FunctionName'
-        tags_spec = ('list_tags', 'Tags',
-                     'Resource', 'arn')
+        name = "FunctionName"
+        date = "LastModified"
+        dimension = "FunctionName"
+        tags_spec = ("list_tags", "Tags", "Resource", "arn")
 
     @classmethod
     def filter(cls, arn, resource_id, data):
         function_name = data.get(cls.Meta.id)
-        LOG.debug('%s == %s', resource_id, function_name)
+        LOG.debug("%s == %s", resource_id, function_name)
         return resource_id == function_name
 
     @property
     def arn(self):
-        return self.data.get('FunctionArn')
+        return self.data.get("FunctionArn")
+
 
 class Layer(AWSResource):
     class Meta(object):
-        service = 'lambda'
-        type = 'layer'
-        enum_spec = ('list_layers', 'Layers', None)
+        service = "lambda"
+        type = "layer"
+        enum_spec = ("list_layers", "Layers", None)
         detail_spec = None
-        id = 'LayerName'
+        id = "LayerName"
         filter_name = None
-        name = 'LayerName'
+        name = "LayerName"
         date = None
         dimension = None
 
     @property
     def arn(self):
-        return self.data.get('LayerArn')
+        return self.data.get("LayerArn")

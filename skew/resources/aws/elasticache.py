@@ -16,79 +16,78 @@ from skew.resources.aws import AWSResource
 
 
 class Cluster(AWSResource):
-
     class Meta(object):
-        service = 'elasticache'
-        type = 'cluster'
-        enum_spec = ('describe_cache_clusters',
-                     'CacheClusters[]', None)
+        service = "elasticache"
+        type = "cluster"
+        enum_spec = ("describe_cache_clusters", "CacheClusters[]", None)
         detail_spec = None
-        id = 'CacheClusterId'
-        tags_spec = ('list_tags_for_resource', 'TagList',
-                     'ResourceName', 'arn')
-        filter_name = 'CacheClusterId'
-        filter_type = 'scalar'
-        name = 'CacheClusterId'
-        date = 'CacheClusterCreateTime'
-        dimension = 'CacheClusterId'
+        id = "CacheClusterId"
+        tags_spec = ("list_tags_for_resource", "TagList", "ResourceName", "arn")
+        filter_name = "CacheClusterId"
+        filter_type = "scalar"
+        name = "CacheClusterId"
+        date = "CacheClusterCreateTime"
+        dimension = "CacheClusterId"
 
     @property
     def arn(self):
-        return 'arn:aws:%s:%s:%s:%s:%s' % (
+        return "arn:aws:%s:%s:%s:%s:%s" % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )
 
 
 class SubnetGroup(AWSResource):
-
     class Meta(object):
-        service = 'elasticache'
-        type = 'subnet-group'
-        enum_spec = ('describe_cache_subnet_groups',
-                     'CacheSubnetGroups', None)
+        service = "elasticache"
+        type = "subnet-group"
+        enum_spec = ("describe_cache_subnet_groups", "CacheSubnetGroups", None)
         detail_spec = None
-        id = 'CacheSubnetGroupName'
-        filter_name = 'CacheSubnetGroupName'
-        filter_type = 'scalar'
-        name = 'CacheSubnetGroupName'
+        id = "CacheSubnetGroupName"
+        filter_name = "CacheSubnetGroupName"
+        filter_type = "scalar"
+        name = "CacheSubnetGroupName"
         date = None
         dimension = None
 
 
 class Snapshot(AWSResource):
-
     class Meta(object):
-        service = 'elasticache'
-        type = 'snapshot'
-        enum_spec = ('describe_snapshots', 'Snapshots', None)
+        service = "elasticache"
+        type = "snapshot"
+        enum_spec = ("describe_snapshots", "Snapshots", None)
         detail_spec = None
-        id = 'SnapshotName'
-        tags_spec = ('list_tags_for_resource', 'TagList',
-                     'ResourceName', 'arn')
-        filter_name = 'SnapshotName'
-        filter_type = 'scalar'
-        name = 'SnapshotName'
-        date = 'StartTime'
+        id = "SnapshotName"
+        tags_spec = ("list_tags_for_resource", "TagList", "ResourceName", "arn")
+        filter_name = "SnapshotName"
+        filter_type = "scalar"
+        name = "SnapshotName"
+        date = "StartTime"
         dimension = None
 
     @property
     def arn(self):
-        return 'arn:aws:%s:%s:%s:%s:%s' % (
+        return "arn:aws:%s:%s:%s:%s:%s" % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )
+
 
 class Reserved(AWSResource):
-
     class Meta(object):
-        service = 'elasticache'
-        type = 'reserved'
-        enum_spec = ('describe_reserved_cache_nodes', 'ReservedCacheNodes', None)
+        service = "elasticache"
+        type = "reserved"
+        enum_spec = ("describe_reserved_cache_nodes", "ReservedCacheNodes", None)
         detail_spec = None
-        id = 'ReservedCacheNodeId'
-        filter_name = 'ReservedCacheNodeId'
-        filter_type = 'scalar'
-        name = 'ReservedCacheNodeId'
-        date = 'StartTime'
-        dimension = 'ReservedCacheNodeId'
+        id = "ReservedCacheNodeId"
+        filter_name = "ReservedCacheNodeId"
+        filter_type = "scalar"
+        name = "ReservedCacheNodeId"
+        date = "StartTime"
+        dimension = "ReservedCacheNodeId"

@@ -18,18 +18,16 @@ from skew.arn import ARNComponent
 
 
 class FooBarComponent(ARNComponent):
-
     def choices(self, context=None):
         if context:
-            if 'sorted' in context:
-                choices = ['bar', 'baz', 'fie', 'foo']
+            if "sorted" in context:
+                choices = ["bar", "baz", "fie", "foo"]
         else:
-            choices = ['foo', 'bar', 'fie', 'baz']
+            choices = ["foo", "bar", "fie", "baz"]
         return choices
 
 
 class TestARNComponent(unittest.TestCase):
-
     def setUp(self):
         pass
 
@@ -37,13 +35,12 @@ class TestARNComponent(unittest.TestCase):
         pass
 
     def test_choices(self):
-        foobar = FooBarComponent('*', None)
-        self.assertEqual(foobar.choices(), ['foo', 'bar', 'fie', 'baz'])
-        self.assertEqual(foobar.choices(
-            context=['sorted']), ['bar', 'baz', 'fie', 'foo'])
-        self.assertEqual(foobar.pattern, '*')
-        self.assertEqual(foobar.matches(), ['foo', 'bar', 'fie', 'baz'])
-        foobar.pattern = 'f.*'
-        self.assertEqual(foobar.pattern, 'f.*')
-        self.assertEqual(foobar.matches(), ['foo', 'fie'])
-        self.assertEqual(foobar.complete('b'), ['bar', 'baz'])
+        foobar = FooBarComponent("*", None)
+        self.assertEqual(foobar.choices(), ["foo", "bar", "fie", "baz"])
+        self.assertEqual(foobar.choices(context=["sorted"]), ["bar", "baz", "fie", "foo"])
+        self.assertEqual(foobar.pattern, "*")
+        self.assertEqual(foobar.matches(), ["foo", "bar", "fie", "baz"])
+        foobar.pattern = "f.*"
+        self.assertEqual(foobar.pattern, "f.*")
+        self.assertEqual(foobar.matches(), ["foo", "fie"])
+        self.assertEqual(foobar.complete("b"), ["bar", "baz"])

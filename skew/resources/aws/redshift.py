@@ -16,29 +16,28 @@ from skew.resources.aws import AWSResource
 
 
 class Cluster(AWSResource):
-
     class Meta(object):
-        service = 'redshift'
-        type = 'cluster'
-        enum_spec = ('describe_clusters', 'Clusters', None)
+        service = "redshift"
+        type = "cluster"
+        enum_spec = ("describe_clusters", "Clusters", None)
         detail_spec = None
-        id = 'ClusterIdentifier'
-        filter_name = 'ClusterIdentifier'
-        filter_type = 'scalar'
-        name = 'ClusterIdentifier'
-        date = 'ClusterCreateTime'
-        dimension = 'ClusterIdentifier'
+        id = "ClusterIdentifier"
+        filter_name = "ClusterIdentifier"
+        filter_type = "scalar"
+        name = "ClusterIdentifier"
+        date = "ClusterCreateTime"
+        dimension = "ClusterIdentifier"
+
 
 class Reserved(AWSResource):
-
     class Meta(object):
-        service = 'redshift'
-        type = 'reserved'
-        enum_spec = ('describe_reserved_nodes', 'ReservedNodes', None)
+        service = "redshift"
+        type = "reserved"
+        enum_spec = ("describe_reserved_nodes", "ReservedNodes", None)
         detail_spec = None
-        id = 'ReservedNodeId'
-        filter_name = 'ReservedNodeId'
-        filter_type = 'scalar'
-        name = 'ReservedNodeId'
-        date = 'StartTime'
-        dimension = 'ReservedNodeId'
+        id = "ReservedNodeId"
+        filter_name = "ReservedNodeId"
+        filter_type = "scalar"
+        name = "ReservedNodeId"
+        date = "StartTime"
+        dimension = "ReservedNodeId"

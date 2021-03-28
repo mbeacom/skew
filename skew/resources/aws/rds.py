@@ -16,62 +16,67 @@ from skew.resources.aws import AWSResource
 
 
 class DBInstance(AWSResource):
-
     class Meta(object):
-        service = 'rds'
-        type = 'db'
-        enum_spec = ('describe_db_instances', 'DBInstances', None)
-        tags_spec = ('list_tags_for_resource', 'TagList',
-                     'ResourceName', 'arn')
+        service = "rds"
+        type = "db"
+        enum_spec = ("describe_db_instances", "DBInstances", None)
+        tags_spec = ("list_tags_for_resource", "TagList", "ResourceName", "arn")
         detail_spec = None
-        id = 'DBInstanceIdentifier'
-        filter_name = 'DBInstanceIdentifier'
-        filter_type = 'scalar'
-        name = 'Endpoint.Address'
-        date = 'InstanceCreateTime'
-        dimension = 'DBInstanceIdentifier'
+        id = "DBInstanceIdentifier"
+        filter_name = "DBInstanceIdentifier"
+        filter_type = "scalar"
+        name = "DBInstanceIdentifier"
+        date = "InstanceCreateTime"
+        dimension = "DBInstanceIdentifier"
 
     @property
     def arn(self):
-        return 'arn:aws:%s:%s:%s:%s:%s' % (
+        return "arn:aws:%s:%s:%s:%s:%s" % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )
+
+    def sleek(self):
+        self._data["LatestRestorableTime"] = ""
 
 
 class DBSecurityGroup(AWSResource):
-
     class Meta(object):
-        service = 'rds'
-        type = 'secgrp'
-        enum_spec = ('describe_db_security_groups', 'DBSecurityGroups', None)
+        service = "rds"
+        type = "secgrp"
+        enum_spec = ("describe_db_security_groups", "DBSecurityGroups", None)
         detail_spec = None
-        id = 'DBSecurityGroupName'
-        filter_name = 'DBSecurityGroupName'
-        filter_type = 'scalar'
-        name = 'DBSecurityGroupDescription'
+        id = "DBSecurityGroupName"
+        filter_name = "DBSecurityGroupName"
+        filter_type = "scalar"
+        name = "DBSecurityGroupDescription"
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'TagList', 'ResourceName', 'arn')
+        tags_spec = ("list_tags_for_resource", "TagList", "ResourceName", "arn")
 
     @property
     def arn(self):
-        return 'arn:aws:%s:%s:%s:%s:%s' % (
+        return "arn:aws:%s:%s:%s:%s:%s" % (
             self._client.service_name,
             self._client.region_name,
-            self._client.account_id, self.resourcetype, self.id)
+            self._client.account_id,
+            self.resourcetype,
+            self.id,
+        )
 
 
 class Reserved(AWSResource):
-
     class Meta(object):
-        service = 'rds'
-        type = 'reserved'
-        enum_spec = ('describe_reserved_db_instances', 'ReservedDBInstances', None)
+        service = "rds"
+        type = "reserved"
+        enum_spec = ("describe_reserved_db_instances", "ReservedDBInstances", None)
         detail_spec = None
-        id = 'ReservedDBInstanceId'
-        filter_name = 'ReservedDBInstanceId'
-        filter_type = 'scalar'
-        name = 'ReservedDBInstanceId'
-        date = 'Start'
-        dimension = 'ReservedDBInstanceId'
+        id = "ReservedDBInstanceId"
+        filter_name = "ReservedDBInstanceId"
+        filter_type = "scalar"
+        name = "ReservedDBInstanceId"
+        date = "Start"
+        dimension = "ReservedDBInstanceId"
