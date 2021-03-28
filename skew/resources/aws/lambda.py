@@ -17,16 +17,13 @@ import logging
 
 from skew.resources.aws import AWSResource
 
-
 LOG = logging.getLogger(__name__)
 
 
 class Function(AWSResource):
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = list(
-            super(Function, cls).enumerate(arn, region, account, resource_id, **kwargs)
-        )
+        resources = list(super(Function, cls).enumerate(arn, region, account, resource_id, **kwargs))
         for r in resources:
             r.data["EventSources"] = []
             kwargs = {"FunctionName": r.data["FunctionName"]}
@@ -56,21 +53,21 @@ class Function(AWSResource):
 
     @property
     def arn(self):
-        return self.data.get('FunctionArn')
+        return self.data.get("FunctionArn")
 
 
 class Layer(AWSResource):
     class Meta(object):
-        service = 'lambda'
-        type = 'layer'
-        enum_spec = ('list_layers', 'Layers', None)
+        service = "lambda"
+        type = "layer"
+        enum_spec = ("list_layers", "Layers", None)
         detail_spec = None
-        id = 'LayerName'
+        id = "LayerName"
         filter_name = None
-        name = 'LayerName'
+        name = "LayerName"
         date = None
         dimension = None
 
     @property
     def arn(self):
-        return self.data.get('LayerArn')
+        return self.data.get("LayerArn")

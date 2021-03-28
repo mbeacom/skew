@@ -14,42 +14,40 @@ from skew.resources.aws import AWSResource
 
 class Application(AWSResource):
     class Meta(object):
-        service = 'elasticbeanstalk'
-        type = 'application'
-        enum_spec = ('describe_applications', 'Applications', None)
+        service = "elasticbeanstalk"
+        type = "application"
+        enum_spec = ("describe_applications", "Applications", None)
         detail_spec = None
-        id = 'ApplicationName'
+        id = "ApplicationName"
         filter_name = None
         filter_type = None
-        name = 'ApplicationName'
+        name = "ApplicationName"
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTags[]',
-                     'ResourceArn', 'arn')
+        tags_spec = ("list_tags_for_resource", "ResourceTags[]", "ResourceArn", "arn")
 
 
 class Environment(AWSResource):
     class Meta(object):
-        service = 'elasticbeanstalk'
-        type = 'environment'
-        enum_spec = ('describe_environments', 'Environments', None)
+        service = "elasticbeanstalk"
+        type = "environment"
+        enum_spec = ("describe_environments", "Environments", None)
         detail_spec = None
-        id = 'EnvironmentName'
+        id = "EnvironmentName"
         filter_name = None
         filter_type = None
-        name = 'EnvironmentName'
+        name = "EnvironmentName"
         date = None
         dimension = None
-        tags_spec = ('list_tags_for_resource', 'ResourceTags[]',
-                     'ResourceArn', 'arn')
+        tags_spec = ("list_tags_for_resource", "ResourceTags[]", "ResourceArn", "arn")
 
     @property
     def arn(self):
-        return 'arn:aws:%s:%s:%s:%s/%s/%s' % (
+        return "arn:aws:%s:%s:%s:%s/%s/%s" % (
             self._client.service_name,
             self._client.region_name,
             self._client.account_id,
             self.resourcetype,
-            self._data['ApplicationName'],
-            self.id
+            self._data["ApplicationName"],
+            self.id,
         )

@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
 import logging
+import os
 
 import yaml
 
-from skew.exception import ConfigNotFoundError
 from skew.awsdefaults import get_caller_identity_account_id
+from skew.exception import ConfigNotFoundError
 
 LOG = logging.getLogger(__name__)
 

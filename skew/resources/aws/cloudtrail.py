@@ -13,11 +13,13 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-import jmespath
 import logging
+
+import jmespath
 from botocore.exceptions import ClientError
-from skew.resources.aws import AWSResource
+
 from skew.awsclient import get_awsclient
+from skew.resources.aws import AWSResource
 
 LOG = logging.getLogger(__name__)
 
@@ -30,9 +32,7 @@ class CloudTrail(AWSResource):
             data = client.call("list_trails", query="Trails[]")
             if data:
                 if account and account != "*":
-                    data = filter(
-                        lambda d: account == d["TrailARN"].split(":")[4], data
-                    )
+                    data = filter(lambda d: account == d["TrailARN"].split(":")[4], data)
                 if region and region != "*":
                     data = filter(lambda d: region == d["HomeRegion"], data)
                 if resource_id and resource_id != "*":

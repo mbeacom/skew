@@ -14,12 +14,12 @@
 # language governing permissions and limitations under the License.
 
 import logging
+
 import jmespath
+from botocore.exceptions import ClientError
 
 from skew.awsclient import get_awsclient
 from skew.resources.json_dump import json_dump
-
-from botocore.exceptions import ClientError
 
 LOG = logging.getLogger(__name__)
 

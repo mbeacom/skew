@@ -76,9 +76,7 @@ class Subscription(AWSResource):
 
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = super(Subscription, cls).enumerate(
-            arn, region, account, resource_id, **kwargs
-        )
+        resources = super(Subscription, cls).enumerate(arn, region, account, resource_id, **kwargs)
 
         return [r for r in resources if r.id not in cls.invalid_arns]
 

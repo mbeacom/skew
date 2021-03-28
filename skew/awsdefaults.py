@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import List
 import os
-import boto3
 from functools import lru_cache
+from typing import List
+
+import boto3
 from botocore.config import Config
 
 __all__ = [
@@ -45,9 +46,7 @@ def get_all_activated_regions() -> List[str]:
     return list(
         map(
             lambda r: r["RegionName"],
-            get_client(session=get_default_session(), service="ec2").describe_regions()[
-                "Regions"
-            ],
+            get_client(session=get_default_session(), service="ec2").describe_regions()["Regions"],
         )
     )
 

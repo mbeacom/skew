@@ -13,8 +13,8 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-import logging
 import datetime
+import logging
 from collections import namedtuple
 
 import jmespath
@@ -189,9 +189,7 @@ class AWSResource(Resource):
         # python2.6 does not have timedelta.total_seconds() so we have
         # to calculate this ourselves.  This is straight from the
         # datetime docs.
-        return (
-            delta.microseconds + (delta.seconds + delta.days * 24 * 3600) * 10 ** 6
-        ) / 10 ** 6
+        return (delta.microseconds + (delta.seconds + delta.days * 24 * 3600) * 10 ** 6) / 10 ** 6
 
     def get_metric_data(
         self,
@@ -296,6 +294,4 @@ class AWSResource(Resource):
         return self._client.call(method, **kwargs)
 
 
-ArnComponents = namedtuple(
-    "ArnComponents", ["scheme", "provider", "service", "region", "account", "resource"]
-)
+ArnComponents = namedtuple("ArnComponents", ["scheme", "provider", "service", "region", "account", "resource"])

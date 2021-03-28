@@ -20,7 +20,6 @@ import jmespath
 
 from skew.resources.aws import AWSResource
 
-
 LOG = logging.getLogger(__name__)
 
 

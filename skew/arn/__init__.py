@@ -17,8 +17,8 @@
 import logging
 import re
 
-from six.moves import zip_longest
 import jmespath
+from six.moves import zip_longest
 
 import skew.resources
 from skew.config import get_config
@@ -128,11 +128,7 @@ class Resource(ARNComponent):
         for resource_type in self.matches(context):
             resource_path = ".".join([provider, service_name, resource_type])
             resource_cls = skew.resources.find_resource_class(resource_path)
-            resources.extend(
-                resource_cls.enumerate(
-                    self._arn, region, account, resource_id, **kwargs
-                )
-            )
+            resources.extend(resource_cls.enumerate(self._arn, region, account, resource_id, **kwargs))
         return resources
 
 
@@ -322,9 +318,7 @@ class ARN(object):
         if "|" in arn_string:
             arn_string, query = arn_string.split("|")
             self.query = jmespath.compile(query)
-        pairs = zip_longest(
-            self.ComponentClasses, arn_string.split(":", 5), fillvalue="*"
-        )
+        pairs = zip_longest(self.ComponentClasses, arn_string.split(":", 5), fillvalue="*")
         self._components = [c(n, self) for c, n in pairs]
 
     @property

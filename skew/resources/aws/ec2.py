@@ -281,16 +281,16 @@ class FlowLog(AWSResource):
         date = "CreationTime"
         dimension = None
 
-class Reserved(AWSResource):
 
+class Reserved(AWSResource):
     class Meta(object):
-        service = 'ec2'
-        type = 'reserved'
-        enum_spec = ('describe_reserved_instances', 'ReservedInstances', None)
+        service = "ec2"
+        type = "reserved"
+        enum_spec = ("describe_reserved_instances", "ReservedInstances", None)
         detail_spec = None
-        id = 'ReservedInstancesId'
-        filter_name = 'ReservedInstancesIds'
-        filter_type = 'list'
-        name = 'ReservedInstancesId'
-        date = 'Start'
-        dimension = 'ReservedInstancesId'
+        id = "ReservedInstancesId"
+        filter_name = "ReservedInstancesIds"
+        filter_type = "list"
+        name = "ReservedInstancesId"
+        date = "Start"
+        dimension = "ReservedInstancesId"

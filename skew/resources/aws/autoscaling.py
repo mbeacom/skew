@@ -15,8 +15,8 @@
 
 import jmespath
 
-from skew.resources.aws import AWSResource
 from skew.awsclient import get_awsclient
+from skew.resources.aws import AWSResource
 
 
 class AutoScalingGroup(AWSResource):

@@ -9,24 +9,33 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-from skew.resources.aws import AWSResource
-
 import jmespath
 
-class DeliveryStream(AWSResource):
+from skew.resources.aws import AWSResource
 
+
+class DeliveryStream(AWSResource):
     class Meta(object):
-        service = 'firehose'
-        type = 'deliverystream'
-        enum_spec = ('list_delivery_streams', 'DeliveryStreamNames', None)
-        detail_spec = ('describe_delivery_stream', 'DeliveryStreamName', 'DeliveryStreamDescription')
-        id = 'DeliveryStreamName'
+        service = "firehose"
+        type = "deliverystream"
+        enum_spec = ("list_delivery_streams", "DeliveryStreamNames", None)
+        detail_spec = (
+            "describe_delivery_stream",
+            "DeliveryStreamName",
+            "DeliveryStreamDescription",
+        )
+        id = "DeliveryStreamName"
         filter_name = None
         filter_type = None
-        name = 'DeliveryStreamName'
-        date = 'CreateTimestamp'
-        dimension = 'DeliveryStreamName'
-        tags_spec = ('list_tags_for_delivery_stream', 'Tags[]', 'DeliveryStreamName', 'id')
+        name = "DeliveryStreamName"
+        date = "CreateTimestamp"
+        dimension = "DeliveryStreamName"
+        tags_spec = (
+            "list_tags_for_delivery_stream",
+            "Tags[]",
+            "DeliveryStreamName",
+            "id",
+        )
 
     def __init__(self, client, data, query=None):
         super(DeliveryStream, self).__init__(client, data, query)

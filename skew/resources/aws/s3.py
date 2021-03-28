@@ -11,8 +11,9 @@
 # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
-import jmespath
 import logging
+
+import jmespath
 
 from skew.resources.aws import AWSResource
 
@@ -25,9 +26,7 @@ class Bucket(AWSResource):
 
     @classmethod
     def enumerate(cls, arn, region, account, resource_id=None, **kwargs):
-        resources = super(Bucket, cls).enumerate(
-            arn, region, account, resource_id, **kwargs
-        )
+        resources = super(Bucket, cls).enumerate(arn, region, account, resource_id, **kwargs)
         region_resources = []
         if region is None:
             region = "us-east-1"
@@ -135,25 +134,19 @@ class Bucket(AWSResource):
     @property
     def location(self):
         if "LocationConstraint" not in self._data:
-            self._data["LocationConstraint"] = self._feed_from_spec(
-                attr_spec=self.Meta.attr_spec["location"]
-            )
+            self._data["LocationConstraint"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["location"])
         return self._data["LocationConstraint"]
 
     @property
     def acl(self):
         if "Acl" not in self._data:
-            self._data["Acl"] = {
-                "Grants": self._feed_from_spec(attr_spec=self.Meta.attr_spec["acl"])
-            }
+            self._data["Acl"] = {"Grants": self._feed_from_spec(attr_spec=self.Meta.attr_spec["acl"])}
         return self._data["Acl"]
 
     @property
     def cors(self):
         if "CORSRules" not in self._data:
-            self._data["CORSRules"] = self._feed_from_spec(
-                attr_spec=self.Meta.attr_spec["cors"]
-            )
+            self._data["CORSRules"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["cors"])
         return self._data["CORSRules"]
 
     @property
@@ -168,36 +161,26 @@ class Bucket(AWSResource):
     def lifecycle(self):
         if "LifecycleConfiguration" not in self._data:
             self._data["LifecycleConfiguration"] = {
-                "Rules": self._feed_from_spec(
-                    attr_spec=self.Meta.attr_spec["lifecycle"]
-                )
+                "Rules": self._feed_from_spec(attr_spec=self.Meta.attr_spec["lifecycle"])
             }
         return self._data["LifecycleConfiguration"]
 
     @property
     def logging(self):
         if "Logging" not in self._data:
-            self._data["Logging"] = {
-                "LoggingEnabled": self._feed_from_spec(
-                    attr_spec=self.Meta.attr_spec["logging"]
-                )
-            }
+            self._data["Logging"] = {"LoggingEnabled": self._feed_from_spec(attr_spec=self.Meta.attr_spec["logging"])}
         return self._data["Logging"]
 
     @property
     def policy(self):
         if "Policy" not in self._data:
-            self._data["Policy"] = self._feed_from_spec(
-                attr_spec=self.Meta.attr_spec["policy"]
-            )
+            self._data["Policy"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["policy"])
         return self._data["Policy"]
 
     @property
     def policy_status(self):
         if "PolicyStatus" not in self._data:
-            self._data["PolicyStatus"] = self._feed_from_spec(
-                attr_spec=self.Meta.attr_spec["policy_status"]
-            )
+            self._data["PolicyStatus"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["policy_status"])
         return self._data["PolicyStatus"]
 
     @property
@@ -206,17 +189,13 @@ class Bucket(AWSResource):
             _rep = self._feed_from_spec(attr_spec=self.Meta.attr_spec["notifications"])
             self._data["NotificationConfiguration"] = {}
             if "TopicConfigurations" in _rep:
-                self._data["NotificationConfiguration"]["TopicConfigurations"] = _rep[
-                    "TopicConfigurations"
-                ]
+                self._data["NotificationConfiguration"]["TopicConfigurations"] = _rep["TopicConfigurations"]
             if "QueueConfigurations" in _rep:
-                self._data["NotificationConfiguration"]["QueueConfigurations"] = _rep[
-                    "QueueConfigurations"
-                ]
+                self._data["NotificationConfiguration"]["QueueConfigurations"] = _rep["QueueConfigurations"]
             if "LambdaFunctionConfigurations" in _rep:
-                self._data["NotificationConfiguration"][
+                self._data["NotificationConfiguration"]["LambdaFunctionConfigurations"] = _rep[
                     "LambdaFunctionConfigurations"
-                ] = _rep["LambdaFunctionConfigurations"]
+                ]
         return self._data["NotificationConfiguration"]
 
     @property
@@ -233,9 +212,7 @@ class Bucket(AWSResource):
     @property
     def website(self):
         if "Website" not in self._data:
-            self._data["Website"] = self._feed_from_spec(
-                attr_spec=self.Meta.attr_spec["website"]
-            )
+            self._data["Website"] = self._feed_from_spec(attr_spec=self.Meta.attr_spec["website"])
         return self._data["Website"]
 
     def __iter__(self):

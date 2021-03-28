@@ -13,15 +13,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
 import logging
 import time
 
-import datetime
-import jmespath
 import boto3
-from botocore.exceptions import ClientError
-from botocore.config import Config
 import botocore
+import jmespath
+from botocore.config import Config
+from botocore.exceptions import ClientError
 
 from skew.config import get_config
 
@@ -169,5 +169,5 @@ def get_awsclient(service_name, region_name, account_id, **kwargs):
         service_name=service_name,
         region_name=None if region_name == "" else region_name,
         account_id=account_id,
-        **kwargs
+        **kwargs,
     )

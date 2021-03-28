@@ -16,9 +16,8 @@ import logging
 
 import jmespath
 
-from skew.resources.aws import AWSResource
 from skew.awsclient import get_awsclient
-
+from skew.resources.aws import AWSResource
 
 LOG = logging.getLogger(__name__)
 
@@ -65,7 +64,5 @@ class Filesystem(AWSResource):
     @classmethod
     def unset_tags(cls, arn, region, account, tag_keys, resource_id=None, **kwargs):
         client = get_awsclient(cls.Meta.service, region, account, **kwargs)
-        x = client.call(
-            "delete_tags", FileSystemId=arn.split("/")[-1], TagKeys=tag_keys
-        )
+        x = client.call("delete_tags", FileSystemId=arn.split("/")[-1], TagKeys=tag_keys)
         return x

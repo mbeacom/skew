@@ -18,19 +18,17 @@ from skew.resources.aws import AWSResource
 
 
 class ElasticsearchDomain(AWSResource):
-
     class Meta(object):
-        service = 'es'
-        type = 'domain'
-        enum_spec = ('list_domain_names', 'DomainNames[].DomainName', None)
-        tags_spec = ('list_tags', 'TagList',
-                     'ARN', 'arn')
-        detail_spec = ('describe_elasticsearch_domain', 'DomainName', 'DomainStatus')
-        id = 'DomainName'
+        service = "es"
+        type = "domain"
+        enum_spec = ("list_domain_names", "DomainNames[].DomainName", None)
+        tags_spec = ("list_tags", "TagList", "ARN", "arn")
+        detail_spec = ("describe_elasticsearch_domain", "DomainName", "DomainStatus")
+        id = "DomainName"
         filter_name = None
-        name = 'DomainName'
+        name = "DomainName"
         date = None
-        dimension = 'DomainName'
+        dimension = "DomainName"
 
     def __init__(self, client, data, query=None):
         super(ElasticsearchDomain, self).__init__(client, data, query)
